@@ -73,7 +73,8 @@ ion-list {
 
 ion-list-header {
   border-bottom:1px solid var(--gray-10);
-  padding: 0;
+  padding: 4px 0;
+  min-height: 0;
 }
 
 ion-list-header ion-label {
@@ -81,8 +82,4 @@ ion-list-header ion-label {
   text-align: center;
   margin-top:0;
   margin-bottom:0;
-}
-
-:host {
-  min-height: 0!important;
 }
