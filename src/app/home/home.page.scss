@@ -85,18 +85,39 @@ ion-list-header ion-label {
   margin-bottom:0;
 }
 
-.border-danger {
+.border-máxima {
   border:1px solid var(--danger)
 }
 
-.border-warning {
+.border-alta {
   border:1px solid var(--warning)
 }
 
-.border-primary {
+.border-média {
   border:1px solid var(--ion-color-primary)
 }
 
-.border-success {
+.border-baixa {
   border:1px solid var(--success)
 }
+.total-processos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+// .bg-máxima, .bg-máxima ::slotted(ion-icon)   {
+//   --background: var(--danger);
+//   color:white;
+//   --color:white;
+//   --fill: white;
+// }
+// .bg-alta  {
+//   --background: var(--warning);
+// }
+// .bg-média  {
+//   --background: var(--ion-color-primary);
+//   --color: white;
+// }
+// .bg-baixa  {
+//   --background: var(--success);
+// }

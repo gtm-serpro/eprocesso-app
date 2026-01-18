@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { Processo } from '../services/data.service';
+import { Processo } from '../services/models/processo.model';
 
 @Component({
   selector: 'app-processo',

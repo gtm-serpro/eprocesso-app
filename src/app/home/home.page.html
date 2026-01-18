@@ -3,7 +3,13 @@
       <ion-buttons slot="start">
         <img src="../../assets/logos/logo-eprocesso-short.svg" alt="">
       </ion-buttons>
-      <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" class="custom" placeholder="Filtrar processos..."></ion-searchbar>
+      <ion-searchbar
+        #searchbar
+        [debounce]="1000"
+        (ionInput)="handleInput($event)"
+        placeholder="Filtrar processos..."
+        class="custom"
+      ></ion-searchbar>
       <ion-buttons slot="end">
         <br-button class="m-2" id="circle" emphasis="secondary" shape="circle" aria-label="Menu">
           <br-icon icon-name="fa6-solid:ellipsis-vertical"></br-icon>
@@ -19,78 +25,51 @@
 
   <ion-list>
     <ion-list-header color="light">
-      <ion-label><b>7941</b>&nbsp;processos para Liberar ou Assinar</ion-label>
-    </ion-list-header>
+      <ion-label>
+        @if (estaFiltrando) {
+          <div class="total-processos">Filtrados&nbsp;<b>{{ quantidadeProcessosFiltrados }}</b>&nbsp;de&nbsp;<b>{{ quantidadeProcessos }}</b>&nbsp;processos<ion-button shape="round" size="small" fill="clear" aria-label="Limpar filtros" (click)="limparTodosFiltros()"><ion-icon slot="icon-only" name="close-outline"></ion-icon></ion-button></div>
+        } @else {
+          <div class="total-processos"><b>{{ quantidadeProcessos }}</b>&nbsp;processos para<ion-button fill="clear" size="small" (click)="filtrarLiberar()">Liberar</ion-button>ou<ion-button fill="clear" size="small" (click)="filtrarAssinar()">Assinar</ion-button></div>
+        }
+      </ion-label>
 
-    <ion-accordion-group [multiple]="true" [value]="['first', 'second', 'third', 'fourth']" expand="inset">
-      <ion-accordion value="first" class="border-danger">
-        <!-- <ion-item slot="header" color="danger" class="sticky">
-          <ion-label><b>2321</b>&nbsp;- prioridade <b>máxima</b></ion-label>
-        </ion-item> -->
-        <div slot="content">
-          @for (processo of processosFiltrados; track processo) {
-            <app-processo [processo]="processo"></app-processo>
-          }
-        </div>
-      </ion-accordion>
-      <ion-accordion value="second" class="border-warning">
-        <!-- <ion-item slot="header" color="warning"  class="sticky">
-          <ion-label><b>2321</b>&nbsp;- prioridade <b>alta</b></ion-label>
-        </ion-item> -->
-        <div slot="content">
-          @for (processo of processosFiltrados; track processo) {
-            <app-processo [processo]="processo"></app-processo>
-          }
-        </div>
-      </ion-accordion>
-      <ion-accordion value="third" class="border-primary">
-        <!-- <ion-item slot="header" color="primary">
-          <ion-label><b>2321</b>&nbsp;- prioridade <b>média</b></ion-label>
-        </ion-item> -->
-        <div slot="content">
-          @for (processo of processosFiltrados; track processo) {
-            <app-processo [processo]="processo"></app-processo>
-          }
-        </div>
-      </ion-accordion>
-      <ion-accordion value="fourth" class="border-success">
-        <!-- <ion-item slot="header" color="success">
-          <ion-label><b>2321</b>&nbsp;- prioridade <b>baixa</b></ion-label>
-        </ion-item> -->
-        <div slot="content">
-          @for (processo of processosFiltrados; track processo) {
-            <app-processo [processo]="processo"></app-processo>
-          }
-        </div>
-      </ion-accordion>
+    </ion-list-header>
+    <ion-accordion-group
+      [multiple]="true"
+      [value]="valoresAccordion"
+      expand="inset"
+    >
+
+      @for (prioridade of prioridades; track prioridade.tipo) {
+
+        @if (processosPorPrioridade(prioridade.tipo).length > 0) {
+
+          <ion-accordion
+            [value]="prioridade.tipo"
+            [class]="'border-' + prioridade.color"
+          >
+
+            <ion-item slot="header" [color]="prioridade.color">
+              <ion-label>
+                Prioridade <b>{{ prioridade.tipo }}</b>
+              </ion-label>
+            </ion-item>
+
+            <div slot="content">
+              @for (
+                processo of processosPorPrioridade(prioridade.tipo);
+                track processo.id
+              ) {
+                <app-processo [processo]="processo"></app-processo>
+              }
+            </div>
+
+          </ion-accordion>
+
+        }
+
+      }
+
     </ion-accordion-group>
-
-    <!-- <ion-list-header color="danger">
-      <ion-label><b>2321</b>&nbsp;processos com prioridade <b>máxima</b></ion-label>
-    </ion-list-header>
-    @for (processo of processosFiltrados; track processo) {
-      <app-processo [processo]="processo"></app-processo>
-    }
-
-    <ion-list-header color="warning">
-      <ion-label><b>2321</b>&nbsp;processos com prioridade <b>alta</b></ion-label>
-    </ion-list-header>
-    @for (processo of processosFiltrados; track processo) {
-      <app-processo [processo]="processo"></app-processo>
-    }
-
-    <ion-list-header color="primary">
-      <ion-label><b>2321</b>&nbsp;processos com prioridade <b>média</b></ion-label>
-    </ion-list-header>
-    @for (processo of processosFiltrados; track processo) {
-      <app-processo [processo]="processo"></app-processo>
-    }
-
-    <ion-list-header color="success">
-      <ion-label><b>2321</b>&nbsp;processos com prioridade <b>baixa</b></ion-label>
-    </ion-list-header>
-    @for (processo of processosFiltrados; track processo) {
-      <app-processo [processo]="processo"></app-processo>
-    }-->
   </ion-list>
 </ion-content>

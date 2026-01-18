@@ -1,28 +1,59 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { RefresherCustomEvent } from '@ionic/angular';
-import { ProcessoComponent } from '../processo/processo.component';
+import { IonSearchbar } from '@ionic/angular';
 
-import { DataService, Processo } from '../services/data.service';
-
+import { DataService } from '../services/data.service';
+import {
+  Processo,
+  PrioridadeProcesso
+} from '../services/models/processo.model';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  standalone: false,
+  standalone: false
 })
+
 export class HomePage {
+
   private data = inject(DataService);
+
+  @ViewChild('searchbar') searchbar!: IonSearchbar;
+
+
 
   processos: Processo[] = [];
   processosFiltrados: Processo[] = [];
 
   hideHeader = false;
+  lastScrollTop = 0;
 
+  /* =========================
+   * PRIORIDADES (TIPADAS)
+   * ========================= */
+
+  prioridades: {
+    tipo: PrioridadeProcesso;
+    color: string;
+  }[] = [
+    { tipo: PrioridadeProcesso.MAXIMA, color: 'danger' },
+    { tipo: PrioridadeProcesso.ALTA, color: 'warning' },
+    { tipo: PrioridadeProcesso.MEDIA, color: 'primary' },
+    { tipo: PrioridadeProcesso.BAIXA, color: 'success' },
+    
+  ] ;
+
+  quantidadeProcessos = 0;
   constructor() {
     this.processos = this.data.getProcessos();
     this.processosFiltrados = [...this.processos];
+    this.quantidadeProcessos = this.data.getQuantidadeProcessos();
   }
+
+  /* =========================
+   * REFRESH
+   * ========================= */
 
   refresh(ev: any) {
     setTimeout(() => {
@@ -30,17 +61,17 @@ export class HomePage {
     }, 3000);
   }
 
-  lastScrollTop = 0;
+  /* =========================
+   * SCROLL HEADER
+   * ========================= */
 
   onScroll(ev: any) {
     const currentScroll = ev.detail.scrollTop;
 
-    // usuário começou a subir
     if (currentScroll < this.lastScrollTop) {
       this.hideHeader = false;
     }
 
-    // usuário está descendo e já passou do threshold
     if (currentScroll > this.lastScrollTop && currentScroll > 56) {
       this.hideHeader = true;
     }
@@ -48,8 +79,19 @@ export class HomePage {
     this.lastScrollTop = currentScroll;
   }
 
+  /* =========================
+   * FILTRO
+   * ========================= */
+
+  handleInput(event: Event) {
+    const searchbar = event.target as HTMLIonSearchbarElement;
+    this.filtroTexto = (searchbar.value || '').toLowerCase().trim();
+    this.aplicarFiltros();
+  }
+
+
   private matchProcesso(p: Processo, query: string): boolean {
-    return Object.entries(p).some(([_, value]) => {
+    return Object.values(p).some(value => {
       if (value instanceof Date) {
         return value.toISOString().toLowerCase().includes(query);
       }
@@ -57,14 +99,86 @@ export class HomePage {
     });
   }
 
-  handleInput(event: Event) {
-    const searchbar = event.target as HTMLIonSearchbarElement;
-    const query = (searchbar.value || '').toLowerCase().trim();
+  /* =========================
+   * AGRUPAMENTO
+   * ========================= */
 
-    this.processosFiltrados = query
-      ? this.processos.filter((p) => this.matchProcesso(p, query))
-      : [...this.processos];
+  processosPorPrioridade(prioridade: PrioridadeProcesso): Processo[] {
+    return this.processosFiltrados.filter(
+      p => p.prioridade === prioridade
+    );
   }
 
+  get valoresAccordion(): PrioridadeProcesso[] {
+    return this.prioridades.map(p => p.tipo);
+  }
+
+  getLabel(prioridade: PrioridadeProcesso) {
+    return prioridade; // ou mapear para i18n depois
+  }
+
+  get estaFiltrando(): boolean {
+    return (
+      !!this.filtroTexto ||
+      this.filtroLiberar ||
+      this.filtroAssinar
+    );
+  }
+
+  get quantidadeProcessosFiltrados(): number {
+    return this.processosFiltrados.length;
+  }
+
+  filtroTexto = '';
+  filtroLiberar = false;
+  filtroAssinar = false;
+  private aplicarFiltros() {
+    this.processosFiltrados = this.processos.filter((p) => {
+
+      // 🔍 texto
+      const matchTexto =
+        !this.filtroTexto || this.matchProcesso(p, this.filtroTexto);
+
+      // 📝 liberar
+      const matchLiberar =
+        !this.filtroLiberar || p.indicadorProvidenciaAberta;
+
+      // ✍️ assinar
+      const matchAssinar =
+        !this.filtroAssinar || p.indicadorPendenteAssinatura;
+
+      return matchTexto && matchLiberar && matchAssinar;
+    });
+  }
+
+  filtrarLiberar() {
+  this.filtroLiberar = true;
+  this.filtroAssinar = false;
+  this.aplicarFiltros();
 }
 
+filtrarAssinar() {
+  this.filtroAssinar = true;
+  this.filtroLiberar = false;
+  this.aplicarFiltros();
+}
+
+limparFiltrosAcoes() {
+  this.filtroLiberar = false;
+  this.filtroAssinar = false;
+  this.aplicarFiltros();
+}
+  limparTodosFiltros() {
+    this.filtroTexto = '';
+    this.filtroLiberar = false;
+    this.filtroAssinar = false;
+
+    this.processosFiltrados = [...this.processos];
+
+    if (this.searchbar) {
+      this.searchbar.value = '';
+    }
+  }
+
+
+}

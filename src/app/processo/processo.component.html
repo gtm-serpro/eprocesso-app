@@ -5,11 +5,27 @@
     </ion-item-options>
 
     <ion-item [routerLink]="'/processo/' + processo.id" [detail]="false">
-      <span class="sigilo"></span>
-      <ion-label class="no-margin">  
-        <p class="numero-formatado">{{ processo.numeroFormatado }}</p>
+      @if (processo.prioridade == 'MÁXIMA') {
+        <span class="sigilo danger"></span>
+      }
+      @if (processo.prioridade == 'ALTA') {
+        <span class="sigilo warning"></span>
+      }
+      @if (processo.prioridade == 'MÉDIA') {
+        <span class="sigilo primary"></span>
+      }
+      @if (processo.prioridade == 'BAIXA') {
+        <span class="sigilo success"></span>
+      }
+      <ion-label class="no-margin">
+        @if (processo.exibirEmNegrito){
+            <p class="numero-formatado"><b>{{ processo.numeroFormatado }}</b></p>
+        }@else {
+          <p class="numero-formatado">{{ processo.numeroFormatado }}</p>
+        }
+        
         @if (processo.nomeInteressado && processo.nomeInteressado !== 'null') {
-          <p class="nome-interessado">{{ processo.nomeInteressado }}</p>
+            <p class="nome-interessado">{{ processo.nomeInteressado }}</p>
         }
         @if (processo.dataDistribuicaoUltima) {
           <p class="data">DISTRIBUÍDO EM: <b>{{ processo.dataDistribuicaoUltima | date:'dd/MM/yyyy' }}</b></p>
@@ -17,10 +33,19 @@
       </ion-label>
       <ion-label slot="end">
         <div class="status-icons" slot="end">
-          <ion-icon aria-hidden="true" name="lock-closed-outline" size="small" color="primary"></ion-icon>
-          <ion-icon aria-hidden="true" name="document-outline" size="small" color="primary"></ion-icon>
-          <ion-icon aria-hidden="true" name="finger-print" size="small" color="danger"></ion-icon>
-          <ion-icon aria-hidden="true" name="mail" size="small" color="danger"></ion-icon>
+
+          @if (processo.indicadorPossuiHabilitacaoNivelSigilo) {
+            <ion-icon aria-hidden="true" name="lock-closed-outline" size="small" color="primary"></ion-icon>
+          }
+          @if (processo.indicadorNotaProcesso) {
+            <ion-icon aria-hidden="true" name="document-outline" size="small" color="primary"></ion-icon>
+          }
+          @if (processo.indicadorPendenteAssinatura) {
+            <ion-icon aria-hidden="true" name="finger-print" size="small" color="danger"></ion-icon>
+          }
+          @if (processo.indicadorProvidenciaAberta) {
+            <ion-icon aria-hidden="true" name="mail" size="small" color="danger"></ion-icon>
+          }
         </div>
       </ion-label>
     </ion-item>

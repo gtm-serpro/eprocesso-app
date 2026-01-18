@@ -23,16 +23,27 @@ ion-item {
 .sigilo {
     height: calc(100% - 8px);
     width: 8px;
-    background-color: var(--danger);
     margin-right: 8px;
     border-radius: 10px;
     margin: auto 8px auto 0;
     flex-shrink: 0;
 }
 
+.sigilo.danger {
+  background-color: var(--danger);
+}
+.sigilo.warning {
+  background-color: var(--warning);
+}
+.sigilo.primary {
+  background-color: var(--ion-color-primary);
+}
+.sigilo.success {
+  background-color: var(--success);
+}
+
 .status-icons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     gap:8px;
     justify-self: end;
 }

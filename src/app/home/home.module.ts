@@ -7,8 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { ProcessoComponentModule } from '../processo/processo.module';
-import { AppModule } from '../app.module';
-import { BrButton } from '@govbr-ds/webcomponents-angular';
 
 @NgModule({
   imports: [
