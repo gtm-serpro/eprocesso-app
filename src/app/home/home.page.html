@@ -29,7 +29,7 @@
         @if (estaFiltrando) {
           <div class="total-processos">Filtrados&nbsp;<b>{{ quantidadeProcessosFiltrados }}</b>&nbsp;de&nbsp;<b>{{ quantidadeProcessos }}</b>&nbsp;processos<ion-button shape="round" size="small" fill="clear" aria-label="Limpar filtros" (click)="limparTodosFiltros()"><ion-icon slot="icon-only" name="close-outline"></ion-icon></ion-button></div>
         } @else {
-          <div class="total-processos"><b>{{ quantidadeProcessos }}</b>&nbsp;processos para<ion-button fill="clear" size="small" (click)="filtrarLiberar()">Liberar</ion-button>ou<ion-button fill="clear" size="small" (click)="filtrarAssinar()">Assinar</ion-button></div>
+          <div class="total-processos"><b>{{ quantidadeProcessos }}</b>&nbsp;processos para<ion-button fill="clear" size="small" (click)="filtrarLiberar()" class="button-no-padding">Liberar</ion-button>ou<ion-button fill="clear" size="small" (click)="filtrarAssinar()" class="button-no-padding">Assinar</ion-button></div>
         }
       </ion-label>
 
