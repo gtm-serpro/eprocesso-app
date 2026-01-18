@@ -15,6 +15,18 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'arquivar/:id',
+    loadChildren: () => import('./arquivar/arquivar.module').then( m => m.ArquivarPageModule)
+  },
+  {
+    path: 'movimentar/:id',
+    loadChildren: () => import('./movimentar/movimentar.module').then( m => m.MovimentarPageModule)
+  },
+  {
+    path: 'liberar/:id',
+    loadChildren: () => import('./liberar/liberar.module').then( m => m.LiberarPageModule)
+  },
 ];
 
 @NgModule({

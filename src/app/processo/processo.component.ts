@@ -20,6 +20,24 @@ export class ProcessoComponent {
     event.preventDefault();
     this.router.navigate(['/processo', this.processo.id]);
   }
+  
+  arquivar(event: Event) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.router.navigate(['/arquivar', this.processo.id]);
+  }
+
+  movimentar(event: Event) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.router.navigate(['/movimentar', this.processo.id]);
+  }
+
+  liberar(event: Event) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.router.navigate(['/liberar', this.processo.id]);
+  }
 
   getSigiloClass(): string {
     const classMap: Record<PrioridadeProcesso, string> = {

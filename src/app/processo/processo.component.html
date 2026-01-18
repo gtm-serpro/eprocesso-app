@@ -1,7 +1,7 @@
 @if (processo) {
   <ion-item-sliding>
     <ion-item-options side="start">
-      <ion-item-option class="slide-action" expandable color="light">
+      <ion-item-option class="slide-action" color="light" (click)="arquivar($event)">
          <span class="column">
           <ion-icon aria-hidden="true" name="archive" size="small" color="danger"></ion-icon>
           <p>Arquivar</p>
@@ -46,16 +46,16 @@
     </ion-item>
 
     <ion-item-options side="end">
-      <ion-item-option class="slide-action" expandable color="light">
+      <ion-item-option class="slide-action" color="light" (click)="movimentar($event)">
         <span class="column">
           <ion-icon aria-hidden="true" name="arrow-forward" size="small" color="primary"></ion-icon>
           <p>Movimentar</p>
         </span>
       </ion-item-option>
-      <ion-item-option  class="slide-action" expandable color="light">
+      <ion-item-option class="slide-action" color="light" (click)="liberar($event)">
         <span class="column">
           <ion-icon aria-hidden="true" name="lock-open" size="small" color="success"></ion-icon>
-          <p >Liberar</p>
+          <p>Liberar</p>
         </span>
       </ion-item-option>
     </ion-item-options>
