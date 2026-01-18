@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, ViewChild } from '@angular/core';
-import { RefresherCustomEvent } from '@ionic/angular';
+import { RefresherCustomEvent, PopoverController } from '@ionic/angular';
 import { IonSearchbar } from '@ionic/angular';
 
 import { DataService } from '../services/data.service';
@@ -7,6 +7,7 @@ import {
   Processo,
   PrioridadeProcesso
 } from '../services/models/processo.model';
+import { MenuPopoverComponent } from '../components/menu-popover/menu-popover.component';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomePage {
 
   private data = inject(DataService);
   private cdr = inject(ChangeDetectorRef);
+  private popoverCtrl = inject(PopoverController);
 
   @ViewChild('searchbar') searchbar!: IonSearchbar;
 
@@ -192,5 +194,21 @@ export class HomePage {
     }
 
     this.cdr.markForCheck();
+  }
+
+  /* =========================
+   * MENU POPOVER
+   * ========================= */
+
+  async abrirMenu(event: Event) {
+    const popover = await this.popoverCtrl.create({
+      component: MenuPopoverComponent,
+      event: event,
+      translucent: true,
+      showBackdrop: true,
+      dismissOnSelect: true
+    });
+
+    await popover.present();
   }
 }

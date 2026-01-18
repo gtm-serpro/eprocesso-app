@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { ProcessoComponentModule } from '../processo/processo.module';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { ProcessoComponentModule } from '../processo/processo.module';
     FormsModule,
     IonicModule,
     ProcessoComponentModule,
+    ComponentsModule,
     HomePageRoutingModule
   ],
   declarations: [HomePage],
