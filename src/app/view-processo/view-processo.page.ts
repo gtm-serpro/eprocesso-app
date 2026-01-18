@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../services/data.service';
-import { Processo } from '../services/models/processo.model';
+import { Processo, PrioridadeProcesso } from '../services/models/processo.model';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -10,11 +11,19 @@ import { IonicModule } from '@ionic/angular';
   templateUrl: './view-processo.page.html',
   styleUrls: ['./view-processo.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule]
+  imports: [IonicModule, CommonModule, FormsModule]
 })
 export class ViewProcessoPage implements OnInit {
 
   processo?: Processo;
+  abaSelecionada = 'documento';
+
+  // Dados mock para as abas
+  documentos: any[] = [];
+  providencias: any[] = [];
+  notas: any[] = [];
+  palavrasChave: any[] = [];
+  historico: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +38,20 @@ export class ViewProcessoPage implements OnInit {
     }
   }
 
-  getBackButtonText() {
-    return 'Voltar';
+  getHeaderColor(): string {
+    if (!this.processo) return 'primary';
+    
+    const colorMap: Record<PrioridadeProcesso, string> = {
+      [PrioridadeProcesso.MAXIMA]: 'danger',
+      [PrioridadeProcesso.ALTA]: 'warning',
+      [PrioridadeProcesso.MEDIA]: 'primary',
+      [PrioridadeProcesso.BAIXA]: 'success'
+    };
+    
+    return colorMap[this.processo.prioridade];
+  }
+
+  selecionarAba(aba: string) {
+    this.abaSelecionada = aba;
   }
 }

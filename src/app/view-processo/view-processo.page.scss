@@ -1,1 +1,62 @@
-/* Estilos específicos da página de visualização do processo */
+ion-segment {
+  margin: 0;
+  padding: 8px;
+  background: var(--ion-color-light);
+}
+
+ion-segment-button {
+  --indicator-color: var(--ion-color-primary);
+  min-width: 120px;
+}
+
+.tab-content {
+  min-height: calc(100vh - 120px);
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 16px;
+  text-align: center;
+  color: var(--ion-color-medium);
+  min-height: 400px;
+
+  ion-icon {
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  p {
+    font-size: 1rem;
+    margin: 0;
+  }
+}
+
+.palavras-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px 0;
+}
+
+ion-list {
+  padding-top: 0;
+}
+
+ion-item {
+  --padding-start: 16px;
+  --inner-padding-end: 16px;
+
+  h2, h3 {
+    margin: 0 0 4px 0;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--ion-color-medium);
+  }
+}

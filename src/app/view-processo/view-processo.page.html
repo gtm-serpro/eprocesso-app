@@ -1,8 +1,7 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar [color]="getHeaderColor()">
     <ion-buttons slot="start">
       <ion-back-button
-        text="Voltar"
         defaultHref="/home">
       </ion-back-button>
     </ion-buttons>
@@ -13,6 +12,140 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <p>Conteúdo</p>
+<ion-content>
+  <!-- Abas -->
+  <ion-segment [(ngModel)]="abaSelecionada" scrollable>
+    <ion-segment-button value="documento">
+      <ion-label>Documento</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="providencia">
+      <ion-label>Providência</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="nota">
+      <ion-label>Nota de Processo</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="palavra">
+      <ion-label>Palavra-chave</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="historico">
+      <ion-label>Histórico</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Conteúdo das Abas -->
+  <div class="tab-content">
+    
+    <!-- ABA: Documento -->
+    @if (abaSelecionada === 'documento') {
+      <div class="ion-padding">
+        @if (documentos.length > 0) {
+          <ion-list>
+            @for (doc of documentos; track doc.id) {
+              <ion-item>
+                <ion-label>
+                  <h2>{{ doc.nome }}</h2>
+                  <p>{{ doc.descricao }}</p>
+                </ion-label>
+              </ion-item>
+            }
+          </ion-list>
+        } @else {
+          <div class="empty-state">
+            <ion-icon name="document-outline" size="large"></ion-icon>
+            <p>Nenhum documento encontrado</p>
+          </div>
+        }
+      </div>
+    }
+
+    <!-- ABA: Providência -->
+    @if (abaSelecionada === 'providencia') {
+      <div class="ion-padding">
+        @if (providencias.length > 0) {
+          <ion-list>
+            @for (prov of providencias; track prov.id) {
+              <ion-item>
+                <ion-label>
+                  <h2>{{ prov.titulo }}</h2>
+                  <p>{{ prov.descricao }}</p>
+                </ion-label>
+              </ion-item>
+            }
+          </ion-list>
+        } @else {
+          <div class="empty-state">
+            <ion-icon name="mail-outline" size="large"></ion-icon>
+            <p>Nenhuma providência aberta</p>
+          </div>
+        }
+      </div>
+    }
+
+    <!-- ABA: Nota de Processo -->
+    @if (abaSelecionada === 'nota') {
+      <div class="ion-padding">
+        @if (notas.length > 0) {
+          <ion-list>
+            @for (nota of notas; track nota.id) {
+              <ion-item>
+                <ion-label>
+                  <h2>{{ nota.titulo }}</h2>
+                  <p>{{ nota.conteudo }}</p>
+                </ion-label>
+              </ion-item>
+            }
+          </ion-list>
+        } @else {
+          <div class="empty-state">
+            <ion-icon name="document-text-outline" size="large"></ion-icon>
+            <p>Nenhuma nota cadastrada</p>
+          </div>
+        }
+      </div>
+    }
+
+    <!-- ABA: Palavra-chave -->
+    @if (abaSelecionada === 'palavra') {
+      <div class="ion-padding">
+        @if (palavrasChave.length > 0) {
+          <div class="palavras-container">
+            @for (palavra of palavrasChave; track palavra.id) {
+              <ion-chip>
+                <ion-label>{{ palavra.nome }}</ion-label>
+              </ion-chip>
+            }
+          </div>
+        } @else {
+          <div class="empty-state">
+            <ion-icon name="pricetag-outline" size="large"></ion-icon>
+            <p>Nenhuma palavra-chave definida</p>
+          </div>
+        }
+      </div>
+    }
+
+    <!-- ABA: Histórico -->
+    @if (abaSelecionada === 'historico') {
+      <div class="ion-padding">
+        @if (historico.length > 0) {
+          <ion-list>
+            @for (item of historico; track item.id) {
+              <ion-item>
+                <ion-label>
+                  <h3>{{ item.acao }}</h3>
+                  <p>{{ item.data }} - {{ item.usuario }}</p>
+                </ion-label>
+              </ion-item>
+            }
+          </ion-list>
+        } @else {
+          <div class="empty-state">
+            <ion-icon name="time-outline" size="large"></ion-icon>
+            <p>Nenhum histórico disponível</p>
+          </div>
+        }
+      </div>
+    }
+
+  </div>
 </ion-content>
