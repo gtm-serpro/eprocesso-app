@@ -6,9 +6,11 @@ import { ViewProcessoPage } from './view-processo.page';
 const routes: Routes = [
   {
     path: ':id',
-    component: ViewProcessoPage
+    component: ViewProcessoPage,
+    // resolve: { processo: ProcessoResolver }
   }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

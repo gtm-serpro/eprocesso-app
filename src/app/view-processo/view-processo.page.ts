@@ -18,17 +18,19 @@ export class ViewProcessoPage implements OnInit {
   private route = inject(ActivatedRoute);
   private platform = inject(Platform);
 
-  ngOnInit() {
-    const idParam = this.route.snapshot.paramMap.get('id');
+//   ngOnInit() {
+//     const idParam = this.route.snapshot.paramMap.get('id');
 
-    if (!idParam) {
-      throw new Error('ID do processo não informado na rota');
-    }
+//     if (!idParam) {
+//       throw new Error('ID do processo não informado na rota');
+//     }
 
-    const id = Number(idParam);
-    this.processo = this.data.getProcessoById(id);
-  }
-
+//     const id = Number(idParam);
+//     this.processo = this.data.getProcessoById(id);
+//   }
+ngOnInit() {
+  this.processo = this.route.snapshot.data['processo'];
+}
   getBackButtonText(): string {
     return this.platform.is('ios') ? 'Inbox' : '';
   }
