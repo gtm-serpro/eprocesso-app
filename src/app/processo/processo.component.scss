@@ -1,8 +1,9 @@
 ion-item {
   --padding-start: 0;
-  --inner-padding-end: 12px;
-  --inner-padding-start: 12px;
+  --inner-padding-end: 8px;
+  --inner-padding-start: 4px;
 }
+
 .numero-formatado {
     font-size: var(--font-size-scale-up-01);
     // margin-bottom: 4px;
@@ -25,7 +26,7 @@ ion-item {
     background-color: var(--danger);
     margin-right: 8px;
     border-radius: 10px;
-    margin: auto 12px auto 0;
+    margin: auto 8px auto 0;
     flex-shrink: 0;
 }
 
