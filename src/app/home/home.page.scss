@@ -1,0 +1,83 @@
+.logo-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.logo,
+.logo-short {
+  height: 40px;
+  width: auto;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.logo {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.logo.hidden {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.logo-short {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) scale(0.9);
+}
+
+.logo-short.visible {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+ion-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ANDROID / WEB (md) */
+ion-header.header-md {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+ion-header.header-md.hidden {
+  box-shadow: none;
+}
+
+/* iOS */
+ion-toolbar {
+  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.3s ease;
+  --background: var(--pure-0);
+}
+
+ion-header.hidden ion-toolbar {
+  --box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+/* movimento */
+ion-header.hidden {
+  transform: translateY(-100%);
+}
+
+.header-secondary, .header-secondary p {
+  display: flex;
+  align-items: center;
+}
+
+
+/* Scoped components require higher specificity to customize */
+ion-searchbar.custom {
+  --background: var(--gray-2);
+  --color: var(--gray-80);
+  --placeholder-color: var(--gray-80);
+  --icon-color: var(--blue-warm-vivid-70);
+  --clear-button-color: var(--gray-80);
+  --box-shadow: none;
+  --border-radius: 4px;
+}

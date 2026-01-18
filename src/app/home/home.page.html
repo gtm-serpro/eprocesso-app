@@ -1,0 +1,49 @@
+<ion-header [class.hidden]="hideHeader">
+  <ion-toolbar>
+    <div slot="secondary" class="header-secondary">
+      <p><b>7941</b>&nbsp;pendências</p>
+      <div class="br-input">
+        <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" class="custom" placeholder="Filtar processos..."></ion-searchbar>
+      </div>
+    </div>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <br-avatar
+          title="Fulano da Silva"   
+          text="W"
+          density="small"
+          bg-color="#ff6b50"
+          aria-label="Avatar com a inicial W"
+        ></br-avatar>
+      </ion-button>
+    </ion-buttons>
+     <ion-title>
+      <div class="logo-wrapper">
+        <img src="../../assets/logos/logo-eprocesso.svg" alt="Logo eProcesso" class="logo">
+        <img src="../../assets/logos/logo-eprocesso-short.svg" alt="Logo eProcesso" class="logo-short">
+      </div>
+      
+     </ion-title>
+     
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" scrollEvents="true" (ionScroll)="onScroll($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">
+        <img src="../../assets/logos/logo-eprocesso-short.svg" alt="eProcesso Logo" class="logo">
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    @for (processo of processosFiltrados; track processo) {
+      <app-processo [processo]="processo"></app-processo>
+    }
+  </ion-list>
+</ion-content>
