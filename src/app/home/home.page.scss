@@ -73,6 +73,7 @@ ion-list {
 
 ion-list-header {
   border-bottom:1px solid var(--gray-10);
+
   // padding: 4px 0;
   // min-height: 0;
 }
@@ -82,4 +83,20 @@ ion-list-header ion-label {
   text-align: center;
   margin-top:0;
   margin-bottom:0;
+}
+
+.border-danger {
+  border:1px solid var(--danger)
+}
+
+.border-warning {
+  border:1px solid var(--warning)
+}
+
+.border-primary {
+  border:1px solid var(--ion-color-primary)
+}
+
+.border-success {
+  border:1px solid var(--success)
 }

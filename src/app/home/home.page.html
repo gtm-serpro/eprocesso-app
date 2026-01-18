@@ -23,40 +23,40 @@
     </ion-list-header>
 
     <ion-accordion-group [multiple]="true" [value]="['first', 'second', 'third', 'fourth']" expand="inset">
-      <ion-accordion value="first">
-        <ion-item slot="header" color="danger">
+      <ion-accordion value="first" class="border-danger">
+        <!-- <ion-item slot="header" color="danger" class="sticky">
           <ion-label><b>2321</b>&nbsp;- prioridade <b>máxima</b></ion-label>
-        </ion-item>
+        </ion-item> -->
         <div slot="content">
           @for (processo of processosFiltrados; track processo) {
             <app-processo [processo]="processo"></app-processo>
           }
         </div>
       </ion-accordion>
-      <ion-accordion value="second">
-        <ion-item slot="header" color="warning">
+      <ion-accordion value="second" class="border-warning">
+        <!-- <ion-item slot="header" color="warning"  class="sticky">
           <ion-label><b>2321</b>&nbsp;- prioridade <b>alta</b></ion-label>
-        </ion-item>
+        </ion-item> -->
         <div slot="content">
           @for (processo of processosFiltrados; track processo) {
             <app-processo [processo]="processo"></app-processo>
           }
         </div>
       </ion-accordion>
-      <ion-accordion value="third">
-        <ion-item slot="header" color="primary">
+      <ion-accordion value="third" class="border-primary">
+        <!-- <ion-item slot="header" color="primary">
           <ion-label><b>2321</b>&nbsp;- prioridade <b>média</b></ion-label>
-        </ion-item>
+        </ion-item> -->
         <div slot="content">
           @for (processo of processosFiltrados; track processo) {
             <app-processo [processo]="processo"></app-processo>
           }
         </div>
       </ion-accordion>
-      <ion-accordion value="fourth">
-        <ion-item slot="header" color="success">
+      <ion-accordion value="fourth" class="border-success">
+        <!-- <ion-item slot="header" color="success">
           <ion-label><b>2321</b>&nbsp;- prioridade <b>baixa</b></ion-label>
-        </ion-item>
+        </ion-item> -->
         <div slot="content">
           @for (processo of processosFiltrados; track processo) {
             <app-processo [processo]="processo"></app-processo>
@@ -91,6 +91,6 @@
     </ion-list-header>
     @for (processo of processosFiltrados; track processo) {
       <app-processo [processo]="processo"></app-processo>
-    } -->
+    }-->
   </ion-list>
 </ion-content>
