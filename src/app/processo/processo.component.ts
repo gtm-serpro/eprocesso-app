@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Processo } from '../services/models/processo.model';
 
 @Component({
@@ -10,9 +10,14 @@ import { Processo } from '../services/models/processo.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProcessoComponent {
-  private platform = inject(Platform);
-  @Input() processo?: Processo;
-  isIos() {
-    return this.platform.is('ios')
+  @Input() processo!: Processo;
+
+  constructor(private router: Router) {}
+
+  abrirProcesso(event: Event) {
+    event.stopPropagation(); // 🔑 impede o accordion de reagir
+    event.preventDefault();
+
+    this.router.navigate(['/processo', this.processo.id]);
   }
 }

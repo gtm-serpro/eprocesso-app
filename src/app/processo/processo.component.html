@@ -4,7 +4,7 @@
       <ion-item-option color="success" expandable>Archive</ion-item-option>
     </ion-item-options>
 
-    <ion-item [routerLink]="'/processo/' + processo.id" [detail]="false">
+    <ion-item button detail="false" (click)="abrirProcesso($event)">
       @if (processo.prioridade == 'MÁXIMA') {
         <span class="sigilo danger"></span>
       }

@@ -1047,11 +1047,15 @@ export class DataService {
     return this.response.quantidadeProcessos;
     }
 
-    getProcessoById(id: number): Processo | undefined {
-    return this.response.processos
-        .map(p => this.mapProcesso(p))
-        .find(p => p.id === id);
-    }
+    getProcessoById(id: number): Processo {
+        const raw = this.processosRaw.find(p => p.id === id);
+
+        if (!raw) {
+            throw new Error(`Processo com id ${id} não encontrado`);
+        }
+
+        return this.mapProcesso(raw);
+        }
 
 
   /* =========================
