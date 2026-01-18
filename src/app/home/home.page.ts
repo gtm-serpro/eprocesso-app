@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, ViewChild } from '@angular/core';
 import { RefresherCustomEvent } from '@ionic/angular';
 import { IonSearchbar } from '@ionic/angular';
 
@@ -12,22 +12,25 @@ import {
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  standalone: false
+  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class HomePage {
 
   private data = inject(DataService);
+  private cdr = inject(ChangeDetectorRef);
 
   @ViewChild('searchbar') searchbar!: IonSearchbar;
-
-
 
   processos: Processo[] = [];
   processosFiltrados: Processo[] = [];
 
   hideHeader = false;
   lastScrollTop = 0;
+
+  // Cache para evitar recálculos
+  private processosCache = new Map<PrioridadeProcesso, Processo[]>();
 
   /* =========================
    * PRIORIDADES (TIPADAS)
@@ -41,10 +44,10 @@ export class HomePage {
       { tipo: PrioridadeProcesso.ALTA, color: 'warning' },
       { tipo: PrioridadeProcesso.MEDIA, color: 'primary' },
       { tipo: PrioridadeProcesso.BAIXA, color: 'success' },
-
     ];
 
   quantidadeProcessos = 0;
+  
   constructor() {
     this.processos = this.data.getProcessos();
     this.processosFiltrados = [...this.processos];
@@ -89,7 +92,6 @@ export class HomePage {
     this.aplicarFiltros();
   }
 
-
   private matchProcesso(p: Processo, query: string): boolean {
     return Object.values(p).some(value => {
       if (value instanceof Date) {
@@ -104,9 +106,13 @@ export class HomePage {
    * ========================= */
 
   processosPorPrioridade(prioridade: PrioridadeProcesso): Processo[] {
-    return this.processosFiltrados.filter(
-      p => p.prioridade === prioridade
-    );
+    if (!this.processosCache.has(prioridade)) {
+      this.processosCache.set(
+        prioridade,
+        this.processosFiltrados.filter(p => p.prioridade === prioridade)
+      );
+    }
+    return this.processosCache.get(prioridade)!;
   }
 
   get valoresAccordion(): PrioridadeProcesso[] {
@@ -114,7 +120,7 @@ export class HomePage {
   }
 
   getLabel(prioridade: PrioridadeProcesso) {
-    return prioridade; // ou mapear para i18n depois
+    return prioridade;
   }
 
   get estaFiltrando(): boolean {
@@ -132,9 +138,9 @@ export class HomePage {
   filtroTexto = '';
   filtroLiberar = false;
   filtroAssinar = false;
+
   private aplicarFiltros() {
     this.processosFiltrados = this.processos.filter((p) => {
-
       // 🔍 texto
       const matchTexto =
         !this.filtroTexto || this.matchProcesso(p, this.filtroTexto);
@@ -149,6 +155,10 @@ export class HomePage {
 
       return matchTexto && matchLiberar && matchAssinar;
     });
+
+    // Limpa o cache quando os filtros mudam
+    this.processosCache.clear();
+    this.cdr.markForCheck();
   }
 
   filtrarLiberar() {
@@ -168,17 +178,19 @@ export class HomePage {
     this.filtroAssinar = false;
     this.aplicarFiltros();
   }
+
   limparTodosFiltros() {
     this.filtroTexto = '';
     this.filtroLiberar = false;
     this.filtroAssinar = false;
 
     this.processosFiltrados = [...this.processos];
+    this.processosCache.clear();
 
     if (this.searchbar) {
       this.searchbar.value = '';
     }
+
+    this.cdr.markForCheck();
   }
-
-
 }

@@ -5,9 +5,9 @@ ion-item {
 }
 
 .numero-formatado {
-    font-size: var(--font-size-scale-up-01);
-    // margin-bottom: 4px;
+  font-size: var(--font-size-scale-up-01);
 }
+
 .nome-interessado {
   text-overflow: ellipsis;
   overflow: hidden;
@@ -16,105 +16,52 @@ ion-item {
   text-transform: uppercase;
   margin-bottom: 0px;
 }
+
 .data {
-    font-size: var(--font-size-scale-down-01);
+  font-size: var(--font-size-scale-down-01);
 }
 
 .sigilo {
-    height: calc(100% - 8px);
-    width: 8px;
-    margin-right: 8px;
-    border-radius: 10px;
-    margin: auto 8px auto 0;
-    flex-shrink: 0;
+  height: calc(100% - 8px);
+  width: 8px;
+  margin-right: 8px;
+  border-radius: 10px;
+  margin: auto 8px auto 0;
+  flex-shrink: 0;
 }
 
 .sigilo.danger {
   background-color: var(--danger);
 }
+
 .sigilo.warning {
   background-color: var(--warning);
 }
+
 .sigilo.primary {
   background-color: var(--ion-color-primary);
 }
+
 .sigilo.success {
   background-color: var(--success);
 }
 
 .status-icons {
-    display: flex;
-    gap:8px;
-    justify-self: end;
+  display: flex;
+  gap: 8px;
+  justify-self: end;
 }
 
 .no-margin {
-  margin-top:0!important;
-  margin-bottom:0!important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
-
-// ::slotted(ion-label) {
-//     margin-top: 4px!important;
-//     margin-bottom: 4px!important;
-// }
-
-// ion-item h2 {
-//   font-weight: 600;
-//   margin: 0;
-  
-//   /**
-//    * With larger font scales
-//    * the date/time should wrap to the next
-//    * line. However, there should be
-//    * space between the name and the date/time
-//    * if they can appear on the same line.
-//    */
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: space-between;
-// }
-
-// ion-item p {
-//   text-overflow: ellipsis;
-//   overflow: hidden;
-//   white-space: nowrap;
-//   width: 95%;
-// }
-
-// ion-item .date {
-//   align-items: center;
-//   display: flex;
-// }
-
-// ion-item ion-icon {
-//   color: #c9c9ca;
-// }
-
-// ion-item ion-note {
-//   font-size: 0.9375rem;
-//   margin-right: 8px;
-//   font-weight: normal;
-// }
-
-// ion-item ion-note.md {
-//   margin-right: 14px;
-// }
-
-// .dot {
-//   display: block;
-//   height: 12px;
-//   width: 12px;
-//   border-radius: 50%;
-//   align-self: start;
-//   margin: 16px 10px 16px 16px;
-// }
-
-// .dot-unread {
-//   background: var(--ion-color-primary);
-// }
-
-// ion-footer ion-title {
-//   font-size: 11px;
-//   font-weight: normal;
-// }
+/* Highlight do termo de busca */
+::ng-deep .highlight {
+  background-color: var(--ion-color-warning, #ffc409);
+  color: var(--ion-color-warning-contrast, #000);
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: 600;
+}

@@ -1021,18 +1021,12 @@ export class DataService {
         }
     ]
 };
-  private processosRaw: ProcessoRaw[] = [];
+
   private processos: Processo[] = [];
 
-  constructor() {}
-
-  /* =========================
-   * LOAD (API → DOMÍNIO)
-   * ========================= */
-
-  load(response: ApiResponse): void {
-    this.processosRaw = response.processos;
-    this.processos = response.processos.map(p => this.mapProcesso(p));
+  constructor() {
+    // Mapeia os dados na inicialização
+    this.processos = this.response.processos.map(p => this.mapProcesso(p));
   }
 
   /* =========================
@@ -1040,16 +1034,16 @@ export class DataService {
    * ========================= */
 
   getProcessos(): Processo[] {
-    return this.response.processos.map(p => this.mapProcesso(p));
-    }
+    return this.processos;
+  }
 
-    getQuantidadeProcessos(): number {
+  getQuantidadeProcessos(): number {
     return this.response.quantidadeProcessos;
-    }
+  }
 
-    getProcessoById(id: number): Processo | undefined {
-  return this.processos.find(p => p.id === id);
-}
+  getProcessoById(id: number): Processo | undefined {
+    return this.processos.find(p => p.id === id);
+  }
 
   /* =========================
    * PARSERS

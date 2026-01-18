@@ -6,10 +6,11 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ProcessoComponent } from './processo.component';
+import { HighlightPipe } from '../pipes/highlight.pipe';
 
 @NgModule({
   imports: [ CommonModule, FormsModule, IonicModule, RouterModule ],
-  declarations: [ProcessoComponent],
+  declarations: [ProcessoComponent, HighlightPipe],
   exports: [ProcessoComponent]
 })
 export class ProcessoComponentModule {}

@@ -5,35 +5,25 @@
     </ion-item-options>
 
     <ion-item button detail="false" (click)="abrirProcesso($event)">
-      @if (processo.prioridade == 'MÁXIMA') {
-        <span class="sigilo danger"></span>
-      }
-      @if (processo.prioridade == 'ALTA') {
-        <span class="sigilo warning"></span>
-      }
-      @if (processo.prioridade == 'MÉDIA') {
-        <span class="sigilo primary"></span>
-      }
-      @if (processo.prioridade == 'BAIXA') {
-        <span class="sigilo success"></span>
-      }
+      <span class="sigilo" [ngClass]="getSigiloClass()"></span>
+      
       <ion-label class="no-margin">
         @if (processo.exibirEmNegrito){
-            <p class="numero-formatado"><b>{{ processo.numeroFormatado }}</b></p>
+            <p class="numero-formatado"><b [innerHTML]="processo.numeroFormatado | highlight:searchTerm"></b></p>
         }@else {
-          <p class="numero-formatado">{{ processo.numeroFormatado }}</p>
+          <p class="numero-formatado" [innerHTML]="processo.numeroFormatado | highlight:searchTerm"></p>
         }
         
         @if (processo.nomeInteressado && processo.nomeInteressado !== 'null') {
-            <p class="nome-interessado">{{ processo.nomeInteressado }}</p>
+            <p class="nome-interessado" [innerHTML]="processo.nomeInteressado | highlight:searchTerm"></p>
         }
         @if (processo.dataDistribuicaoUltima) {
           <p class="data">DISTRIBUÍDO EM: <b>{{ processo.dataDistribuicaoUltima | date:'dd/MM/yyyy' }}</b></p>
         }
       </ion-label>
+      
       <ion-label slot="end">
         <div class="status-icons" slot="end">
-
           @if (processo.indicadorPossuiHabilitacaoNivelSigilo) {
             <ion-icon aria-hidden="true" name="lock-closed" size="small" color="primary"></ion-icon>
           }

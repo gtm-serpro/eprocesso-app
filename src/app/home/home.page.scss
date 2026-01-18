@@ -3,12 +3,14 @@
     display: flex;
     align-items: center;
 }
+
 .logo,
 .logo-short {
   height: 40px;
   width: auto;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
+
 .logo {
   display: none;
 }
@@ -18,7 +20,6 @@ ion-header {
   top: 0;
   z-index: 10;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
 }
 
 /* ANDROID / WEB (md) */
@@ -52,7 +53,6 @@ ion-header.hidden {
   align-items: center;
 }
 
-
 /* Scoped components require higher specificity to customize */
 ion-searchbar.custom {
   --background: var(--gray-2);
@@ -63,71 +63,51 @@ ion-searchbar.custom {
   --box-shadow: none;
   --border-radius: 4px;
 }
+
 ion-searchbar.custom .header-content {
   --display: flex;
 }
 
 ion-list {
-  padding-top:0;
+  padding-top: 0;
 }
 
 ion-list-header {
-  border-bottom:1px solid var(--gray-10);
-
-  // padding: 4px 0;
-  // min-height: 0;
+  border-bottom: 1px solid var(--gray-10);
 }
 
 ion-list-header ion-label {
   text-transform: uppercase;
   text-align: center;
-  margin-top:0;
-  margin-bottom:0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .border-máxima {
-  border:1px solid var(--danger)
+  border: 1px solid var(--danger)
 }
 
 .border-alta {
-  border:1px solid var(--warning)
+  border: 1px solid var(--warning)
 }
 
 .border-média {
-  border:1px solid var(--ion-color-primary)
+  border: 1px solid var(--ion-color-primary)
 }
 
 .border-baixa {
-  border:1px solid var(--success)
+  border: 1px solid var(--success)
 }
+
 .total-processos {
   display: flex;
   align-items: center;
   justify-content: center;
-  // font-size:var(--font-size-scale-down-01)
 }
-// .total-processos *{
-//   font-size:var(--font-size-scale-down-01)
-// }
+
 .button-no-padding {
-  --padding-start:2px;
-  --padding-end:2px;
-  --padding-top:2px;
-  --padding-bottom:2px;
+  --padding-start: 2px;
+  --padding-end: 2px;
+  --padding-top: 2px;
+  --padding-bottom: 2px;
 }
-// .bg-máxima, .bg-máxima ::slotted(ion-icon)   {
-//   --background: var(--danger);
-//   color:white;
-//   --color:white;
-//   --fill: white;
-// }
-// .bg-alta  {
-//   --background: var(--warning);
-// }
-// .bg-média  {
-//   --background: var(--ion-color-primary);
-//   --color: white;
-// }
-// .bg-baixa  {
-//   --background: var(--success);
-// }

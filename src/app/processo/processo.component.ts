@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Processo } from '../services/models/processo.model';
+import { Processo, PrioridadeProcesso } from '../services/models/processo.model';
 
 @Component({
   selector: 'app-processo',
@@ -11,13 +11,23 @@ import { Processo } from '../services/models/processo.model';
 })
 export class ProcessoComponent {
   @Input() processo!: Processo;
+  @Input() searchTerm: string = '';
 
   constructor(private router: Router) {}
 
   abrirProcesso(event: Event) {
-    event.stopPropagation(); // 🔑 impede o accordion de reagir
+    event.stopPropagation();
     event.preventDefault();
-
     this.router.navigate(['/processo', this.processo.id]);
+  }
+
+  getSigiloClass(): string {
+    const classMap: Record<PrioridadeProcesso, string> = {
+      [PrioridadeProcesso.MAXIMA]: 'danger',
+      [PrioridadeProcesso.ALTA]: 'warning',
+      [PrioridadeProcesso.MEDIA]: 'primary',
+      [PrioridadeProcesso.BAIXA]: 'success'
+    };
+    return classMap[this.processo.prioridade];
   }
 }

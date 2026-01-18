@@ -56,13 +56,10 @@
             </ion-item>
 
             <div slot="content">
-              @for (
-                processo of processosPorPrioridade(prioridade.tipo);
-                track processo.id
-              ) {
+              @for (processo of processosPorPrioridade(prioridade.tipo); track processo.id) {
                 <app-processo
-                  *ngFor="let processo of processos"
                   [processo]="processo"
+                  [searchTerm]="filtroTexto"
                   [routerLink]="['/processo', processo.id]">
                 </app-processo>
               }
