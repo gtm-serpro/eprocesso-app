@@ -18,6 +18,35 @@
   </ion-refresher>
 
   <ion-list>
+    <ion-list-header color="light">
+      <ion-label><b>7941</b>&nbsp;processos para Liberar ou Assinar</ion-label>
+    </ion-list-header>
+
+
+    <ion-list-header color="danger">
+      <ion-label><b>2321</b>&nbsp;processos com prioridade <b>máxima</b></ion-label>
+    </ion-list-header>
+    @for (processo of processosFiltrados; track processo) {
+      <app-processo [processo]="processo"></app-processo>
+    }
+
+    <ion-list-header color="warning">
+      <ion-label><b>2321</b>&nbsp;processos com prioridade <b>alta</b></ion-label>
+    </ion-list-header>
+    @for (processo of processosFiltrados; track processo) {
+      <app-processo [processo]="processo"></app-processo>
+    }
+
+    <ion-list-header color="primary">
+      <ion-label><b>2321</b>&nbsp;processos com prioridade <b>média</b></ion-label>
+    </ion-list-header>
+    @for (processo of processosFiltrados; track processo) {
+      <app-processo [processo]="processo"></app-processo>
+    }
+
+    <ion-list-header color="success">
+      <ion-label><b>2321</b>&nbsp;processos com prioridade <b>baixa</b></ion-label>
+    </ion-list-header>
     @for (processo of processosFiltrados; track processo) {
       <app-processo [processo]="processo"></app-processo>
     }

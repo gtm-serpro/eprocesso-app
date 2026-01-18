@@ -18,6 +18,7 @@ ion-header {
   top: 0;
   z-index: 10;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
 }
 
 /* ANDROID / WEB (md) */
@@ -64,4 +65,24 @@ ion-searchbar.custom {
 }
 ion-searchbar.custom .header-content {
   --display: flex;
+}
+
+ion-list {
+  padding-top:0;
+}
+
+ion-list-header {
+  border-bottom:1px solid var(--gray-10);
+  padding: 0;
+}
+
+ion-list-header ion-label {
+  text-transform: uppercase;
+  text-align: center;
+  margin-top:0;
+  margin-bottom:0;
+}
+
+:host {
+  min-height: 0!important;
 }
