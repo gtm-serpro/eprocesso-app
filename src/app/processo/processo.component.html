@@ -12,7 +12,7 @@
           <p class="nome-interessado">{{ processo.nomeInteressado }}</p>
         }
         @if (processo.dataDistribuicaoUltima) {
-          <p>DISTRIBUÍDO: <b>{{ processo.dataDistribuicaoUltima | date:'dd/MM/yyyy' }}</b></p>
+          <p class="data">DISTRIBUÍDO EM: <b>{{ processo.dataDistribuicaoUltima | date:'dd/MM/yyyy' }}</b></p>
         }
       </ion-label>
       <ion-label slot="end">

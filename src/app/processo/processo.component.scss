@@ -4,15 +4,19 @@ ion-item {
   --inner-padding-start: 12px;
 }
 .numero-formatado {
-    font-size: var(--font-size-scale-up-02);
-    margin-bottom: 8px;
+    font-size: var(--font-size-scale-up-01);
+    margin-bottom: 4px;
 }
 .nome-interessado {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  max-width: 200px;
-//   margin-bottom: 4px;
+  max-width: 250px;
+  text-transform: uppercase;
+  margin-bottom: 0px;
+}
+.data {
+    font-size: var(--font-size-scale-down-01);
 }
 
 .sigilo {
@@ -30,7 +34,10 @@ ion-item {
     gap:8px;
     justify-self: end;
 }
-
+// ::slotted(ion-label) {
+//     margin-top: 4px!important;
+//     margin-bottom: 4px!important;
+// }
 
 // ion-item h2 {
 //   font-weight: 600;
