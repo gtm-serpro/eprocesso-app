@@ -5,7 +5,7 @@ ion-item {
 }
 .numero-formatado {
     font-size: var(--font-size-scale-up-01);
-    margin-bottom: 4px;
+    // margin-bottom: 4px;
 }
 .nome-interessado {
   text-overflow: ellipsis;
@@ -20,12 +20,13 @@ ion-item {
 }
 
 .sigilo {
-    height: calc(100% - 20px);
+    height: calc(100% - 8px);
     width: 8px;
     background-color: red;
     margin-right: 8px;
     border-radius: 10px;
     margin: auto 12px auto 0;
+    flex-shrink: 0;
 }
 
 .status-icons {
