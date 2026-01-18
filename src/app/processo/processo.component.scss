@@ -65,3 +65,25 @@ ion-item {
   border-radius: 3px;
   font-weight: 600;
 }
+.slide-action {
+  text-transform: uppercase;
+  border-right:1px solid var(--gray-10);
+    border-left:1px solid var(--gray-10);
+}
+.slide-action + .slide-action {
+    border-left:0px solid var(--gray-10);
+}
+.column {
+    display: flex;
+    flex-flow: column;
+    gap:0;
+    align-items: center;
+    justify-content: center;
+    
+
+    p {
+      padding: 0;
+      margin: 0;
+      font-size: 12px;
+    }
+}

@@ -1,7 +1,7 @@
 <ion-header [class.hidden]="hideHeader">
   <ion-toolbar>
       <ion-buttons slot="start">
-        <img src="../../assets/logos/logo-eprocesso-short.svg" alt="">
+        <img src="../../assets/logos/logo-eprocesso-short.svg" alt="eProcesso" class="logo">
       </ion-buttons>
       <ion-searchbar
         #searchbar
@@ -10,7 +10,7 @@
         placeholder="Filtrar processos..."
         class="custom"
       ></ion-searchbar>
-      <ion-buttons slot="end">
+      <ion-buttons slot="end" class="menu">
         <br-button class="m-2" id="circle" emphasis="secondary" shape="circle" aria-label="Menu" (click)="abrirMenu($event)">
           <br-icon icon-name="fa6-solid:ellipsis-vertical"></br-icon>
         </br-button>
@@ -27,9 +27,9 @@
     <ion-list-header color="light">
       <ion-label>
         @if (estaFiltrando) {
-          <div class="total-processos">Filtrados&nbsp;<b>{{ quantidadeProcessosFiltrados }}</b>&nbsp;de&nbsp;<b>{{ quantidadeProcessos }}</b>&nbsp;processos<ion-button shape="round" size="small" fill="clear" aria-label="Limpar filtros" (click)="limparTodosFiltros()"><ion-icon slot="icon-only" name="close-outline"></ion-icon></ion-button></div>
+          <p class="total-processos">Filtrados&nbsp;<strong>{{ quantidadeProcessosFiltrados }}</strong>&nbsp;de&nbsp;<strong>{{ quantidadeProcessos }}</strong>&nbsp;processos<ion-button shape="round" size="small" fill="clear" aria-label="Limpar filtros" (click)="limparTodosFiltros()"><ion-icon slot="icon-only" name="close-outline"></ion-icon></ion-button></p>
         } @else {
-          <div class="total-processos"><b>{{ quantidadeProcessos }}</b>&nbsp;processos para<ion-button fill="clear" size="small" (click)="filtrarLiberar()" class="button-no-padding">Liberar</ion-button>ou<ion-button fill="clear" size="small" (click)="filtrarAssinar()" class="button-no-padding">Assinar</ion-button></div>
+          <p class="total-processos"><strong>{{ quantidadeProcessos }}</strong>&nbsp;processos para<ion-button fill="clear" size="small" (click)="filtrarLiberar()" class="button-no-padding">Liberar</ion-button>ou<ion-button fill="clear" size="small" (click)="filtrarAssinar()" class="button-no-padding">Assinar</ion-button></p>
         }
       </ion-label>
 
@@ -51,7 +51,7 @@
 
             <ion-item slot="header" [color]="prioridade.color">
               <ion-label>
-                Prioridade <b>{{ prioridade.tipo }}</b>
+                Prioridade <strong>{{ prioridade.tipo }}</strong>
               </ion-label>
             </ion-item>
 

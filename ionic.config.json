@@ -1,5 +1,7 @@
 {
   "name": "eprocesso",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

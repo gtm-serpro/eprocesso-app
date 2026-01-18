@@ -1,18 +1,18 @@
 ion-segment {
-  margin: 0;
-  padding: 8px;
   background: var(--ion-color-light);
+}
+.ios ion-segment {
+  padding: 6px 8px 10px 8px;
 }
 
 ion-segment-button {
   --indicator-color: var(--ion-color-primary);
-  min-width: 120px;
+  --padding-:0;
 }
-
-.tab-content {
-  min-height: calc(100vh - 120px);
+.ios ion-accordion {
+  // border-radius:1px;
+  background-color: red;
 }
-
 .empty-state {
   display: flex;
   flex-direction: column;
@@ -21,7 +21,6 @@ ion-segment-button {
   padding: 64px 16px;
   text-align: center;
   color: var(--ion-color-medium);
-  min-height: 400px;
 
   ion-icon {
     margin-bottom: 16px;
@@ -59,4 +58,7 @@ ion-item {
     font-size: 0.875rem;
     color: var(--ion-color-medium);
   }
+}
+.ios ion-title {
+  padding:0;
 }

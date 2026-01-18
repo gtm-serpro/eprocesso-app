@@ -8,9 +8,9 @@ import { ViewProcessoPageRoutingModule } from './view-processo-routing.module';
 @NgModule({
   imports: [
     CommonModule,
-    IonicModule,
     ViewProcessoPageRoutingModule,
-    ViewProcessoPage
+    ViewProcessoPage,
+    IonicModule
   ]
 })
 export class ViewProcessoPageModule {}
