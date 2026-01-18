@@ -31,6 +31,7 @@ ion-header.header-md.hidden {
 
 /* iOS */
 ion-toolbar {
+  padding: 0 10px;
   --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   transition: box-shadow 0.3s ease;
   --background: var(--pure-0);
@@ -60,4 +61,7 @@ ion-searchbar.custom {
   --clear-button-color: var(--gray-80);
   --box-shadow: none;
   --border-radius: 4px;
+}
+ion-searchbar.custom .header-content {
+  --display: flex;
 }

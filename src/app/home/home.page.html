@@ -1,28 +1,14 @@
 <ion-header [class.hidden]="hideHeader">
   <ion-toolbar>
-    <div slot="secondary" class="header-secondary">
-      <p><b>7941</b>&nbsp;pendências</p>
-      <div class="br-input">
-        <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" class="custom" placeholder="Filtar processos..."></ion-searchbar>
-      </div>
-    </div>
-      <!-- <ion-button slot="primary">
-        <br-avatar
-          title="Fulano da Silva"   
-          text="W"
-          density="small"
-          bg-color="#ff6b50"
-          aria-label="Avatar com a inicial W"
-        ></br-avatar>
-      </ion-button> -->
-     <ion-title>
-      <div class="logo-wrapper">
-        <img src="../../assets/logos/logo-eprocesso.svg" alt="Logo eProcesso" class="logo">
-        <img src="../../assets/logos/logo-eprocesso-short.svg" alt="Logo eProcesso" class="logo-short">
-      </div>
-      
-     </ion-title>
-     
+      <ion-buttons slot="start">
+        <img src="../../assets/logos/logo-eprocesso-short.svg" alt="">
+      </ion-buttons>
+      <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" class="custom" placeholder="Filtrar processos..."></ion-searchbar>
+      <ion-buttons slot="end">
+        <br-button class="m-2" id="circle" emphasis="secondary" shape="circle" aria-label="Menu">
+          <br-icon icon-name="fa6-solid:ellipsis-vertical"></br-icon>
+        </br-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
