@@ -9,28 +9,8 @@
   width: auto;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
-
 .logo {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.logo.hidden {
-  opacity: 0;
-  transform: scale(0.9);
-}
-
-.logo-short {
-  opacity: 0;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%) scale(0.9);
-}
-
-.logo-short.visible {
-  opacity: 1;
-  transform: translateY(-50%) scale(1);
+  display: none;
 }
 
 ion-header {
