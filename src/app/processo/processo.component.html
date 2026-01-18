@@ -6,7 +6,7 @@
 
     <ion-item [routerLink]="'/processo/' + processo.id" [detail]="false">
       <span class="sigilo"></span>
-      <ion-label>  
+      <ion-label class="no-margin">  
         <p class="numero-formatado">{{ processo.numeroFormatado }}</p>
         @if (processo.nomeInteressado && processo.nomeInteressado !== 'null') {
           <p class="nome-interessado">{{ processo.nomeInteressado }}</p>
