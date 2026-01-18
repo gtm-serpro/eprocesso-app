@@ -1,37 +1,34 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Platform } from '@ionic/angular';
-
 import { DataService } from '../services/data.service';
 import { Processo } from '../services/models/processo.model';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-view-processo',
   templateUrl: './view-processo.page.html',
   styleUrls: ['./view-processo.page.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [IonicModule, CommonModule]
 })
 export class ViewProcessoPage implements OnInit {
-  processo!: Processo;
 
-  private data = inject(DataService);
-  private route = inject(ActivatedRoute);
-  private platform = inject(Platform);
+  processo?: Processo;
 
-//   ngOnInit() {
-//     const idParam = this.route.snapshot.paramMap.get('id');
+  constructor(
+    private route: ActivatedRoute,
+    private dataService: DataService
+  ) {}
 
-//     if (!idParam) {
-//       throw new Error('ID do processo não informado na rota');
-//     }
+  ngOnInit() {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
 
-//     const id = Number(idParam);
-//     this.processo = this.data.getProcessoById(id);
-//   }
-ngOnInit() {
-  this.processo = this.route.snapshot.data['processo'];
-}
-  getBackButtonText(): string {
-    return this.platform.is('ios') ? 'Inbox' : '';
+    this.processo = this.dataService.getProcessoById(id);
+  }
+
+  getBackButtonText() {
+    return 'Voltar';
   }
 }
+

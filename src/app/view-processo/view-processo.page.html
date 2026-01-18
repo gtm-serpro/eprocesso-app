@@ -1,15 +1,18 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button [text]="getBackButtonText()" defaultHref="/"></ion-back-button>
+      <ion-back-button
+        text="Voltar"
+        defaultHref="/home">
+      </ion-back-button>
     </ion-buttons>
+
+    <ion-title>
+      {{ processo?.numeroFormatado }}
+    </ion-title>
   </ion-toolbar>
-  
 </ion-header>
-<!-- 
-@if (processo) {
-  <ion-content [fullscreen]="true">
-      {{ processo.numeroFormatado }}
-      {{ processo.nomeInteressado }}
-  </ion-content>
-} -->
+
+<ion-content class="ion-padding">
+  <p>Conteúdo</p>
+</ion-content>

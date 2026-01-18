@@ -5,9 +5,8 @@ import { ViewProcessoPage } from './view-processo.page';
 
 const routes: Routes = [
   {
-    path: ':id',
+    path: '',
     component: ViewProcessoPage,
-    // resolve: { processo: ProcessoResolver }
   }
 ];
 

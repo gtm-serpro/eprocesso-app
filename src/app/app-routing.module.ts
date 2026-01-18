@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: ':id',
+    path: 'processo/:id',
     loadChildren: () => import('./view-processo/view-processo.module').then( m => m.ViewProcessoPageModule)
   },
   {

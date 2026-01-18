@@ -37,12 +37,12 @@ export class HomePage {
     tipo: PrioridadeProcesso;
     color: string;
   }[] = [
-    { tipo: PrioridadeProcesso.MAXIMA, color: 'danger' },
-    { tipo: PrioridadeProcesso.ALTA, color: 'warning' },
-    { tipo: PrioridadeProcesso.MEDIA, color: 'primary' },
-    { tipo: PrioridadeProcesso.BAIXA, color: 'success' },
-    
-  ] ;
+      { tipo: PrioridadeProcesso.MAXIMA, color: 'danger' },
+      { tipo: PrioridadeProcesso.ALTA, color: 'warning' },
+      { tipo: PrioridadeProcesso.MEDIA, color: 'primary' },
+      { tipo: PrioridadeProcesso.BAIXA, color: 'success' },
+
+    ];
 
   quantidadeProcessos = 0;
   constructor() {
@@ -152,22 +152,22 @@ export class HomePage {
   }
 
   filtrarLiberar() {
-  this.filtroLiberar = true;
-  this.filtroAssinar = false;
-  this.aplicarFiltros();
-}
+    this.filtroLiberar = true;
+    this.filtroAssinar = false;
+    this.aplicarFiltros();
+  }
 
-filtrarAssinar() {
-  this.filtroAssinar = true;
-  this.filtroLiberar = false;
-  this.aplicarFiltros();
-}
+  filtrarAssinar() {
+    this.filtroAssinar = true;
+    this.filtroLiberar = false;
+    this.aplicarFiltros();
+  }
 
-limparFiltrosAcoes() {
-  this.filtroLiberar = false;
-  this.filtroAssinar = false;
-  this.aplicarFiltros();
-}
+  limparFiltrosAcoes() {
+    this.filtroLiberar = false;
+    this.filtroAssinar = false;
+    this.aplicarFiltros();
+  }
   limparTodosFiltros() {
     this.filtroTexto = '';
     this.filtroLiberar = false;

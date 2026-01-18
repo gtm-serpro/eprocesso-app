@@ -60,7 +60,11 @@
                 processo of processosPorPrioridade(prioridade.tipo);
                 track processo.id
               ) {
-                <app-processo [processo]="processo"></app-processo>
+                <app-processo
+                  *ngFor="let processo of processos"
+                  [processo]="processo"
+                  [routerLink]="['/processo', processo.id]">
+                </app-processo>
               }
             </div>
 
