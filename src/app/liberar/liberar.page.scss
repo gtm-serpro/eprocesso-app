@@ -24,3 +24,27 @@
   margin:0;
   padding:0;
 }
+
+.liberar-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+// .liberar-content * {
+//     width: 100%;
+// }
+.justificativa{
+  width: 100%;
+}
+ion-select {
+  --width: 100%;
+}
+
+ion-select::part(container) *{
+  width: 100%;
+}
+
+.select-wrapper-inner
+ {
+    width: 100%;
+}

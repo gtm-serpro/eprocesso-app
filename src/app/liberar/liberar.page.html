@@ -1,10 +1,7 @@
 <ion-header [translucent]="false">
   <ion-toolbar [color]="getHeaderColor()">
     <ion-buttons slot="start">
-      <ion-back-button
-        defaultHref="/home"
-        text=""
-      >
+      <ion-back-button defaultHref="/home" text="">
       </ion-back-button>
     </ion-buttons>
 
@@ -13,14 +10,48 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content forceOverscroll="false">
-  <ion-list>
-    <ion-list-header color="light">
+ <ion-list>
+    <ion-list-header>
       <ion-label>
         <p class="sub-header">{{ processo?.numeroFormatado }}</p>
       </ion-label>
     </ion-list-header>
   </ion-list>
-  
+<ion-content forceOverscroll="false" color="light" class="ion-padding">
+ 
+  <ion-grid class="liberar-content">
+    <ion-row><ion-toggle>Atividade trabalhada</ion-toggle></ion-row>
+    <ion-row><ion-toggle>Atividade concluída</ion-toggle></ion-row>
+    <ion-row>
+      <ion-list class="justificativa" lines="full">
+        <ion-item>
+          <ion-select aria-label="Justificativa" placeholder="Escolha uma justificativa" interface="modal" justify="space-between">
+            <ion-select-option value="movimentado-indevidamente">Movimentado indevidamente</ion-select-option>
+            <ion-select-option value="distribuido-indevidamente">Distribuído indevidamente</ion-select-option>
+            <ion-select-option value="atividade-ja-realizada">Atividade já realizada</ion-select-option>
+            <ion-select-option value="recurso-humano-afastado">Recurso humano afastado</ion-select-option>
+            <ion-select-option value="nao-e-mais-preciso-realizar-a-atividade">Não é mais preciso realizar a
+              atividade</ion-select-option>
+            <ion-select-option value="distribuido-para-movimentacao">Distribuído para movimentação</ion-select-option>
+            <ion-select-option value="distribuido-para-apensacao">Distribuído para apensação</ion-select-option>
+            <ion-select-option value="distribuido-para-avaliacao-de-juntada">Distribuído para avaliação de
+              juntada</ion-select-option>
+            <ion-select-option value="liberado-para-movimentacao">Liberado para movimentação</ion-select-option>
+            <ion-select-option value="movimentacao-programada">Movimentação programada</ion-select-option>
+            <ion-select-option value="outros">Outros</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list></ion-row>
+    <ion-row><ion-textarea label="Comentário" labelPlacement="floating" fill="solid"
+        helperText="Caso queira, comente a justificativa aqui."></ion-textarea></ion-row>
+    <ion-row>
+      <ion-card color="primary">
+        <ion-card-content><ion-icon slot="icon-only" name="information-circle"></ion-icon> A hora efetiva não pode ser informada.</ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+
+
+
+
 </ion-content>
