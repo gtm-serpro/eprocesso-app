@@ -67,8 +67,7 @@ ion-item {
 }
 .slide-action {
   text-transform: uppercase;
-  border-right:1px solid var(--gray-10);
-    border-left:1px solid var(--gray-10);
+  border:1px solid var(--gray-10);
 }
 .slide-action + .slide-action {
     border-left:0px solid var(--gray-10);
