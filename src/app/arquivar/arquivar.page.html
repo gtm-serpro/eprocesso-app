@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header [translucent]="false">
   <ion-toolbar [color]="getHeaderColor()">
     <ion-buttons slot="start">
       <ion-back-button
@@ -14,10 +14,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">arquivar</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content forceOverscroll="false">
+  <ion-list>
+    <ion-list-header color="light">
+      <ion-label>
+        <p class="sub-header">{{ processo?.numeroFormatado }}</p>
+      </ion-label>
+    </ion-list-header>
+  </ion-list>
+  
 </ion-content>

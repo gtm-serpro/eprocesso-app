@@ -49,6 +49,14 @@ export class HomePage {
     ];
 
   quantidadeProcessos = 0;
+
+  // Accordions abertos por padrão
+  accordionsAbertos = [
+    PrioridadeProcesso.MAXIMA,
+    PrioridadeProcesso.ALTA,
+    PrioridadeProcesso.MEDIA,
+    PrioridadeProcesso.BAIXA
+  ];
   
   constructor() {
     this.processos = this.data.getProcessos();
@@ -115,14 +123,6 @@ export class HomePage {
       );
     }
     return this.processosCache.get(prioridade)!;
-  }
-
-  get valoresAccordion(): PrioridadeProcesso[] {
-    return this.prioridades.map(p => p.tipo);
-  }
-
-  getLabel(prioridade: PrioridadeProcesso) {
-    return prioridade;
   }
 
   get estaFiltrando(): boolean {

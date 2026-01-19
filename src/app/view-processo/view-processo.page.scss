@@ -9,10 +9,7 @@ ion-segment-button {
   --indicator-color: var(--ion-color-primary);
   --padding-:0;
 }
-.ios ion-accordion {
-  // border-radius:1px;
-  background-color: red;
-}
+
 .empty-state {
   display: flex;
   flex-direction: column;
@@ -61,4 +58,9 @@ ion-item {
 }
 .ios ion-title {
   padding:0;
+}
+.md ion-title {
+  text-align: center;
+  padding:0;
+  width: calc(100% - 48px);
 }

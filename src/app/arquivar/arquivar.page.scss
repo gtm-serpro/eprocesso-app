@@ -1,0 +1,29 @@
+.ios ion-title {
+  padding:0;
+}
+.md ion-title {
+  text-align: center;
+  padding:0;
+  width: calc(100% - 48px);
+}
+.sub-header {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin:0;
+  padding:0;
+}
+.ios ion-list-header,.ios ion-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin:0;
+  padding:0;
+}
+ion-list {
+  padding-top: 0;
+}

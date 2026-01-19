@@ -18,7 +18,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" scrollEvents="true" (ionScroll)="onScroll($event)">
+<ion-content [fullscreen]="true" scrollEvents="true" (ionScroll)="onScroll($event)" forceOverscroll="false">
   <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -34,11 +34,7 @@
       </ion-label>
 
     </ion-list-header>
-    <ion-accordion-group
-      [multiple]="true"
-      [value]="valoresAccordion"
-      expand="inset"
-    >
+    <ion-accordion-group [multiple]="true" expand="inset" [value]="accordionsAbertos">
 
       @for (prioridade of prioridades; track prioridade.tipo) {
 

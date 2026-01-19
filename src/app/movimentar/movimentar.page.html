@@ -1,13 +1,26 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>movimentar</ion-title>
+<ion-header [translucent]="false">
+  <ion-toolbar [color]="getHeaderColor()">
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/home"
+        text=""
+      >
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      Movimentar
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">movimentar</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content forceOverscroll="false">
+  <ion-list>
+    <ion-list-header color="light">
+      <ion-label>
+        <p class="sub-header">{{ processo?.numeroFormatado }}</p>
+      </ion-label>
+    </ion-list-header>
+  </ion-list>
+  
 </ion-content>
