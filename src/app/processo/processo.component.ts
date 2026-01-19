@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { Processo, PrioridadeProcesso } from '../services/models/processo.model';
 
@@ -12,13 +12,43 @@ import { Processo, PrioridadeProcesso } from '../services/models/processo.model'
 export class ProcessoComponent {
   @Input() processo!: Processo;
   @Input() searchTerm: string = '';
+  @Input() modoSelecao: boolean = false;
+  @Input() selecionado: boolean = false;
+
+  @Output() longPress = new EventEmitter<void>();
+  @Output() toggleSelecao = new EventEmitter<void>();
+
+  private pressTimer: any;
+  private readonly LONG_PRESS_DURATION = 500; // ms
 
   constructor(private router: Router) {}
+
+  @HostListener('touchstart', ['$event'])
+  @HostListener('mousedown', ['$event'])
+  onPressStart(event: Event) {
+    if (this.modoSelecao) return;
+    
+    this.pressTimer = setTimeout(() => {
+      this.longPress.emit();
+    }, this.LONG_PRESS_DURATION);
+  }
+
+  @HostListener('touchend', ['$event'])
+  @HostListener('mouseup', ['$event'])
+  @HostListener('touchcancel', ['$event'])
+  onPressEnd(event: Event) {
+    clearTimeout(this.pressTimer);
+  }
 
   abrirProcesso(event: Event) {
     event.stopPropagation();
     event.preventDefault();
-    this.router.navigate(['/processo', this.processo.id]);
+    
+    if (this.modoSelecao) {
+      this.toggleSelecao.emit();
+    } else {
+      this.router.navigate(['/processo', this.processo.id]);
+    }
   }
   
   arquivar(event: Event) {

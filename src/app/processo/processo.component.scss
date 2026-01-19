@@ -2,6 +2,11 @@ ion-item {
   --padding-start: 0;
   --inner-padding-end: 8px;
   --inner-padding-start: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.item-selecionado {
+  --background: var(--ion-color-primary-tint);
 }
 
 .numero-formatado {
@@ -65,13 +70,16 @@ ion-item {
   border-radius: 3px;
   font-weight: 600;
 }
+
 .slide-action {
   text-transform: uppercase;
   border:1px solid var(--gray-10);
 }
+
 .slide-action + .slide-action {
     border-left:0px solid var(--gray-10);
 }
+
 .column {
     display: flex;
     flex-flow: column;
@@ -85,4 +93,10 @@ ion-item {
       margin: 0;
       font-size: 12px;
     }
+}
+
+ion-checkbox {
+  margin-right: 8px;
+  --size: 24px;
+  --checkbox-background-checked: var(--ion-color-primary);
 }

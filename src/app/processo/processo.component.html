@@ -1,5 +1,5 @@
 @if (processo) {
-  <ion-item-sliding>
+  <ion-item-sliding [disabled]="modoSelecao">
     <ion-item-options side="start">
       <ion-item-option class="slide-action" color="light" (click)="arquivar($event)">
          <span class="column">
@@ -9,7 +9,20 @@
       </ion-item-option>
     </ion-item-options>
 
-    <ion-item button detail="false" (click)="abrirProcesso($event)">
+    <ion-item 
+      button 
+      detail="false" 
+      (click)="abrirProcesso($event)"
+      [class.item-selecionado]="selecionado"
+    >
+      @if (modoSelecao) {
+        <ion-checkbox 
+          slot="start" 
+          [checked]="selecionado"
+          (ionChange)="toggleSelecao.emit()"
+        ></ion-checkbox>
+      }
+      
       <span class="sigilo" [ngClass]="getSigiloClass()"></span>
       
       <ion-label class="no-margin">

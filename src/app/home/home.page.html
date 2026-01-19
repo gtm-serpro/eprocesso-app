@@ -16,6 +16,20 @@
         </br-button>
       </ion-buttons>
   </ion-toolbar>
+  
+  <!-- Barra de seleção múltipla -->
+  @if (modoSelecao) {
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-button (click)="cancelarSelecao()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>
+        {{ processosSelecionados.size }} selecionado{{ processosSelecionados.size !== 1 ? 's' : '' }}
+      </ion-title>
+    </ion-toolbar>
+  }
 </ion-header>
 
 <ion-content [fullscreen]="true" scrollEvents="true" (ionScroll)="onScroll($event)" forceOverscroll="false">
@@ -56,7 +70,11 @@
                 <app-processo
                   [processo]="processo"
                   [searchTerm]="filtroTexto"
-                  [routerLink]="['/processo', processo.id]">
+                  [modoSelecao]="modoSelecao"
+                  [selecionado]="isProcessoSelecionado(processo.id)"
+                  (longPress)="iniciarSelecao(processo.id)"
+                  (toggleSelecao)="toggleSelecao(processo.id)"
+                  [routerLink]="modoSelecao ? null : ['/processo', processo.id]">
                 </app-processo>
               }
             </div>

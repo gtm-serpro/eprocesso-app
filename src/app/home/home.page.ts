@@ -31,6 +31,10 @@ export class HomePage {
   hideHeader = false;
   lastScrollTop = 0;
 
+  // Seleção múltipla
+  modoSelecao = false;
+  processosSelecionados = new Set<number>();
+
   // Cache para evitar recálculos
   private processosCache = new Map<PrioridadeProcesso, Processo[]>();
 
@@ -206,9 +210,62 @@ export class HomePage {
       event: event,
       translucent: true,
       showBackdrop: true,
-      dismissOnSelect: true
+      dismissOnSelect: true,
+      componentProps: {
+        modoSelecao: this.modoSelecao,
+        quantidadeSelecionados: this.processosSelecionados.size
+      }
     });
 
     await popover.present();
+
+    const { data } = await popover.onDidDismiss();
+    
+    if (data?.acao) {
+      this.executarAcaoMultipla(data.acao);
+    }
+  }
+
+  /* =========================
+   * SELEÇÃO MÚLTIPLA
+   * ========================= */
+
+  iniciarSelecao(processoId: number) {
+    this.modoSelecao = true;
+    this.processosSelecionados.add(processoId);
+    this.cdr.markForCheck();
+  }
+
+  toggleSelecao(processoId: number) {
+    if (this.processosSelecionados.has(processoId)) {
+      this.processosSelecionados.delete(processoId);
+    } else {
+      this.processosSelecionados.add(processoId);
+    }
+
+    if (this.processosSelecionados.size === 0) {
+      this.cancelarSelecao();
+    }
+
+    this.cdr.markForCheck();
+  }
+
+  cancelarSelecao() {
+    this.modoSelecao = false;
+    this.processosSelecionados.clear();
+    this.cdr.markForCheck();
+  }
+
+  isProcessoSelecionado(processoId: number): boolean {
+    return this.processosSelecionados.has(processoId);
+  }
+
+  executarAcaoMultipla(acao: 'liberar' | 'movimentar' | 'arquivar') {
+    console.log(`Executando ${acao} em ${this.processosSelecionados.size} processos:`, 
+      Array.from(this.processosSelecionados));
+    
+    // Aqui você implementaria a lógica real de cada ação
+    // Por enquanto, apenas cancela a seleção
+    this.cancelarSelecao();
   }
 }
