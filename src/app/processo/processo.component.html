@@ -19,7 +19,7 @@
         <ion-checkbox 
           slot="start" 
           [checked]="selecionado"
-          (ionChange)="toggleSelecao.emit()"
+          (ionChange)="onCheckboxChange($event)"
         ></ion-checkbox>
       }
       

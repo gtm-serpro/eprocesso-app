@@ -222,13 +222,22 @@ export class HomePage {
     const { data } = await popover.onDidDismiss();
     
     if (data?.acao) {
-      this.executarAcaoMultipla(data.acao);
+      if (data.acao === 'ativar-selecao') {
+        this.ativarModoSelecao();
+      } else {
+        this.executarAcaoMultipla(data.acao);
+      }
     }
   }
 
   /* =========================
    * SELEÇÃO MÚLTIPLA
    * ========================= */
+
+  ativarModoSelecao() {
+    this.modoSelecao = true;
+    this.cdr.markForCheck();
+  }
 
   iniciarSelecao(processoId: number) {
     this.modoSelecao = true;
@@ -243,10 +252,9 @@ export class HomePage {
       this.processosSelecionados.add(processoId);
     }
 
-    if (this.processosSelecionados.size === 0) {
-      this.cancelarSelecao();
-    }
-
+    // Não cancela automaticamente se não houver selecionados
+    // O usuário precisa clicar no X para sair do modo
+    
     this.cdr.markForCheck();
   }
 

@@ -50,6 +50,12 @@ export class ProcessoComponent {
       this.router.navigate(['/processo', this.processo.id]);
     }
   }
+
+  onCheckboxChange(event: any) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.toggleSelecao.emit();
+  }
   
   arquivar(event: Event) {
     event.stopPropagation();

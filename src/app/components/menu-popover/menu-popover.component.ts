@@ -24,6 +24,10 @@ import { HorasEstimadasModalComponent } from '../modals/horas-estimadas-modal/ho
         </ion-item>
       } @else {
         <!-- Opções normais -->
+        <ion-item button (click)="executarAcao('ativar-selecao')" detail="false">
+          <ion-icon name="checkbox-outline" slot="start"></ion-icon>
+          <ion-label>Seleção múltipla</ion-label>
+        </ion-item>
         <ion-item button (click)="abrirFiltrar()" detail="false">
           <ion-icon name="filter-outline" slot="start"></ion-icon>
           <ion-label>Filtrar</ion-label>
@@ -87,7 +91,7 @@ export class MenuPopoverComponent {
     await modal.present();
   }
 
-  async executarAcao(acao: 'liberar' | 'movimentar' | 'arquivar') {
+  async executarAcao(acao: 'liberar' | 'movimentar' | 'arquivar' | 'ativar-selecao') {
     await this.popoverCtrl.dismiss({ acao });
   }
 }

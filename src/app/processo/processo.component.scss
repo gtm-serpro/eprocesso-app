@@ -6,7 +6,10 @@ ion-item {
 }
 
 .item-selecionado {
-  --background: var(--ion-color-primary-tint);
+  --background: #e3f2fd !important;
+  --background-activated: #bbdefb !important;
+  --background-focused: #bbdefb !important;
+  --background-hover: #bbdefb !important;
 }
 
 .numero-formatado {
@@ -96,7 +99,7 @@ ion-item {
 }
 
 ion-checkbox {
-  margin-right: 8px;
+  margin: 0 4px 0 6px;
   --size: 24px;
   --checkbox-background-checked: var(--ion-color-primary);
 }

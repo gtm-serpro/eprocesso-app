@@ -16,20 +16,6 @@
         </br-button>
       </ion-buttons>
   </ion-toolbar>
-  
-  <!-- Barra de seleção múltipla -->
-  @if (modoSelecao) {
-    <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-button (click)="cancelarSelecao()">
-          <ion-icon slot="icon-only" name="close"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-title>
-        {{ processosSelecionados.size }} selecionado{{ processosSelecionados.size !== 1 ? 's' : '' }}
-      </ion-title>
-    </ion-toolbar>
-  }
 </ion-header>
 
 <ion-content [fullscreen]="true" scrollEvents="true" (ionScroll)="onScroll($event)" forceOverscroll="false">
@@ -40,7 +26,14 @@
   <ion-list>
     <ion-list-header color="light">
       <ion-label>
-        @if (estaFiltrando) {
+        @if (modoSelecao) {
+          <p class="total-processos">
+            <strong>{{ processosSelecionados.size }}</strong>&nbsp;processo{{ processosSelecionados.size !== 1 ? 's' : '' }} selecionado{{ processosSelecionados.size !== 1 ? 's' : '' }}
+            <ion-button shape="round" size="small" fill="clear" aria-label="Cancelar seleção" (click)="cancelarSelecao()">
+              <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+            </ion-button>
+          </p>
+        } @else if (estaFiltrando) {
           <p class="total-processos">Filtrados&nbsp;<strong>{{ quantidadeProcessosFiltrados }}</strong>&nbsp;de&nbsp;<strong>{{ quantidadeProcessos }}</strong>&nbsp;processos<ion-button shape="round" size="small" fill="clear" aria-label="Limpar filtros" (click)="limparTodosFiltros()"><ion-icon slot="icon-only" name="close-outline"></ion-icon></ion-button></p>
         } @else {
           <p class="total-processos"><strong>{{ quantidadeProcessos }}</strong>&nbsp;processos para<ion-button fill="clear" size="small" (click)="filtrarLiberar()" class="button-no-padding">Liberar</ion-button>ou<ion-button fill="clear" size="small" (click)="filtrarAssinar()" class="button-no-padding">Assinar</ion-button></p>
