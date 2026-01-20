@@ -1,26 +1,272 @@
 <ion-header [translucent]="false">
   <ion-toolbar [color]="getHeaderColor()">
     <ion-buttons slot="start">
-      <ion-back-button
-        defaultHref="/home"
-        text=""
-      >
-      </ion-back-button>
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
     </ion-buttons>
-
-    <ion-title>
-      Movimentar
-    </ion-title>
+    <ion-title>Movimentar</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content forceOverscroll="false">
+<ion-content forceOverscroll="false" color="light">
   <ion-list>
-    <ion-list-header color="light">
+    <ion-list-header>
       <ion-label>
+        <p class="sub-header">{{ processo?.numeroFormatado }}</p>
         <p class="sub-header">{{ processo?.numeroFormatado }}</p>
       </ion-label>
     </ion-list-header>
   </ion-list>
-  
+
+  <div class="content-wrapper ion-padding">
+    <!-- Contexto Atual -->
+    <div class="context-box">
+      
+      <div class="context-title">
+        <ion-icon name="information-circle"></ion-icon>
+        Contexto Atual
+      </div>
+      <div class="context-grid">
+        <div class="context-item">
+          <span class="context-label">Equipe Atual</span>
+          <span class="context-value">Turma Ordinária 1A - Seção 01</span>
+        </div>
+        <div class="context-item">
+          <span class="context-label">Atividade Atual</span>
+          <span class="context-value">Análise Processual</span>
+        </div>
+        <div class="context-item">
+          <span class="context-label">Responsável</span>
+          <span class="context-value">Maria Silva Santos</span>
+        </div>
+      </div>
+     
+    </div>
+
+    <!-- Formulário -->
+    <form [formGroup]="form">
+      <!-- 1. Seleção de Destino -->
+      <div class="form-section">
+        <label class="section-label">Selecione o destino</label>
+        <p class="section-help">Escolha a equipe e atividade de destino</p>
+
+        <div class="tree-selector">
+          <ion-searchbar 
+            [(ngModel)]="buscaDestino" 
+            [ngModelOptions]="{standalone: true}"
+            placeholder="Equipe ou atividade..."
+            (ionInput)="filtrarDestinos()"
+            class="custom"
+          ></ion-searchbar>
+
+          <div class="tree-list">
+            @for (equipe of equipesFiltradas; track equipe.id) {
+              <div class="tree-node">
+                <div class="tree-node-header" (click)="toggleEquipe(equipe.id)">
+                  <ion-icon 
+                    [name]="equipesExpandidas.has(equipe.id) ? 'chevron-down' : 'chevron-forward'"
+                    class="tree-toggle"
+                  ></ion-icon>
+                  <ion-icon name="git-network-outline" class="tree-icon"></ion-icon>
+                  <span class="tree-label">{{ equipe.nome }}</span>
+                </div>
+
+                @if (equipesExpandidas.has(equipe.id)) {
+                  <div class="tree-children">
+                    @for (atividade of equipe.atividades; track atividade.id) {
+                      <div 
+                        class="tree-node-child"
+                        [class.selected]="destinoSelecionado?.atividadeId === atividade.id"
+                        (click)="selecionarDestino(equipe, atividade)"
+                      >
+                        <ion-icon name="folder-outline" class="tree-icon-child"></ion-icon>
+                        <span>{{ atividade.nome }}</span>
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        </div>
+
+        @if (destinoSelecionado) {
+          <div class="destino-selecionado">
+            <strong>Destino selecionado:</strong>
+            <div class="destino-info">
+              <div><strong>Equipe:</strong> {{ destinoSelecionado.equipe }}</div>
+              <div><strong>Atividade:</strong> {{ destinoSelecionado.atividade }}</div>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- 2. Atividade Trabalhada -->
+      <div class="form-section">
+        <div class="switch-container">
+          <label class="section-label">A atividade foi trabalhada?</label>
+          <br-switch 
+            #switchTrabalhada
+            [checked]="form.get('atividadeTrabalhada')?.value"
+            label="Sim"
+          ></br-switch>
+        </div>
+        
+        <!-- Debug: mostra valor atual -->
+        <p style="font-size: 11px; color: #999; margin-top: 8px;">
+          DEBUG: atividadeTrabalhada = {{ form.get('atividadeTrabalhada')?.value }}
+        </p>
+
+        @if (!form.get('atividadeTrabalhada')?.value) {
+          <div class="conditional-field">
+            <ion-item>
+              <ion-select 
+                formControlName="motivoNaoTrabalhada"
+                label="Motivo" 
+                labelPlacement="stacked"
+                interface="action-sheet"
+              >
+                <ion-select-option value="">Selecione um motivo</ion-select-option>
+                <ion-select-option value="movimentado">Processo movimentado indevidamente</ion-select-option>
+                <ion-select-option value="erro">Erro de atribuição</ion-select-option>
+                <ion-select-option value="outro">Outro</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-textarea 
+                formControlName="detalhamentoNaoTrabalhada"
+                label="Detalhamento" 
+                labelPlacement="stacked"
+                placeholder="Descreva os detalhes..."
+                rows="3"
+              ></ion-textarea>
+            </ion-item>
+          </div>
+        }
+      </div>
+
+      <!-- Seção que só aparece quando atividade foi trabalhada -->
+      @if (form.get('atividadeTrabalhada')?.value) {
+        <div class="trabalho-realizado-section">
+        <!-- 3. Atividade Concluída -->
+        <div class="form-section">
+          <div class="switch-container">
+            <label class="section-label">A atividade foi concluída?</label>
+            <br-switch 
+              #switchConcluida
+              [checked]="form.get('atividadeConcluida')?.value"
+              label="Sim"
+            ></br-switch>
+          </div>
+          
+          <!-- Debug: mostra valor atual -->
+          <p style="font-size: 11px; color: #999; margin-top: 8px;">
+            DEBUG: atividadeConcluida = {{ form.get('atividadeConcluida')?.value }}
+          </p>
+          
+          <p class="section-help">
+            Se "Não", permanece em "Processos em análise". Se "Sim", vai para "Processos saídos"
+          </p>
+
+          @if (form.get('atividadeConcluida')?.value) {
+            <div class="conditional-field">
+              <ion-item>
+                <ion-input
+                  formControlName="horasFRA"
+                  type="text"
+                  label="Horas efetivas para o FRA (hh:mm)"
+                  labelPlacement="stacked"
+                  placeholder="Ex: 03:45"
+                  pattern="[0-9]{2}:[0-9]{2}"
+                ></ion-input>
+              </ion-item>
+              <p class="field-help">Atualização do FRA do responsável anterior e atual</p>
+            </div>
+          }
+        </div>
+
+        <!-- 4. Responsável -->
+        <div class="form-section">
+          <label class="section-label">Designar responsável na equipe de destino</label>
+          <p class="section-help">Selecione o membro da equipe que será responsável</p>
+
+          <ion-radio-group formControlName="responsavelSelecionado">
+            @for (membro of membrosEquipe; track membro.id) {
+              <div 
+                class="member-item"
+                [class.selected]="form.get('responsavelSelecionado')?.value === membro.id"
+              >
+                <ion-radio [value]="membro.id" labelPlacement="end">
+                  <div class="member-info">
+                    <div class="member-name">{{ membro.nome }}</div>
+                    <div class="member-role">{{ membro.cargo }}</div>
+                  </div>
+                </ion-radio>
+              </div>
+            }
+          </ion-radio-group>
+        </div>
+
+        <!-- Ações Disponíveis -->
+        <div class="form-section">
+          <label class="section-label">Ações disponíveis na movimentação</label>
+          <p class="section-help">Selecione ações adicionais para executar</p>
+
+          <div class="action-grid">
+            <div class="action-card" (click)="abrirModalTarefa()">
+              <ion-icon name="list-outline"></ion-icon>
+              <div class="action-card-title">Definir Tarefa</div>
+              <div class="action-card-desc">Tarefa de destino</div>
+            </div>
+
+            <div class="action-card" (click)="abrirModalDespacho()">
+              <ion-icon name="document-text-outline"></ion-icon>
+              <div class="action-card-title">Elaborar Despacho</div>
+              <div class="action-card-desc">Gerar documento</div>
+            </div>
+
+            <div class="action-card" (click)="abrirModalAgendamento()">
+              <ion-icon name="calendar-outline"></ion-icon>
+              <div class="action-card-title">Agendar Movimentação</div>
+              <div class="action-card-desc">Programar data/hora</div>
+            </div>
+
+            <div class="action-card" (click)="devolverOrigem()">
+              <ion-icon name="arrow-undo-outline"></ion-icon>
+              <div class="action-card-title">Devolver à Origem</div>
+              <div class="action-card-desc">Retornar processo</div>
+            </div>
+          </div>
+        </div>
+        </div>
+      }
+
+      <!-- Mensagem de Integrações -->
+      <ion-card color="primary" class="integration-message">
+        <ion-card-content>
+          <div class="message-content">
+            <ion-icon name="sync-outline"></ion-icon>
+            <div>
+              <strong>Integrações automáticas</strong>
+              <p>Após a movimentação, o sistema atualizará automaticamente: Portal do CARF, COMPROT, palavras-chave e andamento no SEI.</p>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Botões de Ação -->
+      <div class="action-buttons">
+        <br-button emphasis="secondary">Cancelar</br-button>
+        <br-button emphasis="primary">Confirmar</br-button>
+
+        <!-- <ion-button expand="block" (click)="confirmarMovimentacao()">
+          <ion-icon slot="start" name="swap-horizontal"></ion-icon>
+          Confirmar Movimentação
+        </ion-button>
+        <ion-button expand="block" fill="outline" (click)="cancelar()">
+          <ion-icon slot="start" name="close"></ion-icon>
+          Cancelar
+        </ion-button> -->
+      </div>
+    </form>
+  </div>
 </ion-content>

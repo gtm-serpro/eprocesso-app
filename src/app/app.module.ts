@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, WebcomponentsAngularModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, WebcomponentsAngularModule.forRoot(), WebcomponentsAngularModule.forRoot()],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent]
 })
